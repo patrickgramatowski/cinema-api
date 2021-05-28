@@ -1,5 +1,16 @@
 AllCops:
-  NewCops: enable
+  TargetRubyVersion: 2.7.0
+  Exclude:
+    - 'db/**/*'
+    - 'node_modules/**/*'
+    - 'spec/**/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'app/channels/**/*'
+    - 'app/jobs/**/*'
+    - 'app/mailers/**/*'
+    - 'Rakefile'
+    - 'Config.ru'
 
 Style/ClassAndModuleChildren:
   Enabled: false
@@ -9,3 +20,11 @@ Style/Documentation:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Layout/EndOfLine:
+  Exclude:
+    - 'app/models/**/*'
+    - 'app/controllers/application_controller.rb'
