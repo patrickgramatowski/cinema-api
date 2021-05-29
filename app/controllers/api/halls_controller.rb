@@ -3,7 +3,7 @@ module Api
     include JSONAPI::Fetching
     # HTTP GET list of halls
     def index
-      render jsonapi: Halls.all
+      render jsonapi: Hall.all
     end
   end
 end
