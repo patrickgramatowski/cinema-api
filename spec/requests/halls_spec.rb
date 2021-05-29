@@ -1,3 +1,5 @@
+require "rails_helper"
+
 RSpec.describe "Halls requests" do
   describe "GET /api/halls" do
     let!(:hall) { build(:hall) }
