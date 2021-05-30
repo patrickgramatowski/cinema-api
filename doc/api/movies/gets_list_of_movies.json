@@ -1,9 +1,9 @@
 {
-  "resource": "Halls",
+  "resource": "Movies",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "/api/halls",
-  "description": "Gets list of halls",
+  "route": "/api/movies",
+  "description": "Gets list of movies",
   "explanation": null,
   "parameters": [
 
@@ -14,7 +14,7 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/halls",
+      "request_path": "/api/movies",
       "request_body": null,
       "request_headers": {
         "Host": "example.org",
@@ -36,8 +36,8 @@
         "Content-Type": "application/vnd.api+json; charset=utf-8",
         "ETag": "W/\"8fe32e407a1038ee38753b70e5374b3a\"",
         "Cache-Control": "max-age=0, private, must-revalidate",
-        "X-Request-Id": "31e18884-1587-49c8-a297-bd759c6c66a8",
-        "X-Runtime": "0.002274",
+        "X-Request-Id": "6d0db5c3-6446-4da2-86ef-6c70c9621838",
+        "X-Runtime": "0.001893",
         "Content-Length": "11"
       },
       "response_content_type": "application/vnd.api+json; charset=utf-8",

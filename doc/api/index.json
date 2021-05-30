@@ -12,6 +12,19 @@
           "method": "get"
         }
       ]
+    },
+    {
+      "name": "Movies",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Gets list of movies",
+          "link": "movies/gets_list_of_movies.json",
+          "groups": "all",
+          "route": "/api/movies",
+          "method": "get"
+        }
+      ]
     }
   ]
 }
