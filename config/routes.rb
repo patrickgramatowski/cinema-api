@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # JSON:API
   namespace :api do
-    resources :halls
+    resources :halls, :movies
   end
 end
