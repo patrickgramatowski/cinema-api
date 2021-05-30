@@ -1,0 +1,17 @@
+{
+  "resources": [
+    {
+      "name": "Halls",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "Gets list of halls",
+          "link": "halls/gets_list_of_halls.json",
+          "groups": "all",
+          "route": "/api/halls",
+          "method": "get"
+        }
+      ]
+    }
+  ]
+}
