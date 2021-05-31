@@ -1,14 +1,10 @@
 module Movies
   module UseCases
-    class Delete
+    class Delete < ::UseCases::BaseDelete
       attr_reader :repository
 
       def initialize(repository: Movies::Repository.new)
-        @repository = repository
-      end
-
-      def call(id:)
-        repository.delete(id)
+        super(repository: repository)
       end
     end
   end
