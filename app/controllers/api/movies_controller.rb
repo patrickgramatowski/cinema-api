@@ -8,7 +8,7 @@ module Api
 
     # HTTP GET movie by id
     def show
-      render jsonapi: Movie::UseCases::FetchOne.new.call(id: params[:id])
+      render jsonapi: Movies::UseCases::FetchOne.new.call(id: params[:id])
     end
 
     # HTTP POST create movie
