@@ -1,6 +1,7 @@
 module Api
   class SeancesController < ApplicationController
     include JSONAPI::Fetching
+    include JSONAPI::Errors
     # HTTP GET list of seances
     def index
       render jsonapi: Seances::UseCases::FetchAll.new.call
@@ -18,7 +19,7 @@ module Api
       if @seance.valid?
         render jsonapi: @seance, status: :created
       else
-        render json: @seance.errors, status: :unprocessable_entity
+        render jsonapi_errors: @seance.errors, status: :unprocessable_entity
       end
     end
 
@@ -29,7 +30,7 @@ module Api
       if @seance.valid?
         render jsonapi: @seance
       else
-        render json: @seance.errors, status: :unprocessable_entity
+        render jsonapi_errors: @seance.errors, status: :unprocessable_entity
       end
     end
 
