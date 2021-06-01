@@ -11,7 +11,7 @@ RSpec.describe "Seances requests" do
     end
   end
 
-  resource "Halls" do
+  resource "Seances" do
     get("/api/seances") do
       example "Gets list of seances" do
         do_request

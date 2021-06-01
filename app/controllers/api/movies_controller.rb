@@ -1,6 +1,7 @@
 module Api
   class MoviesController < ApplicationController
     include JSONAPI::Fetching
+    include JSONAPI::Errors
     # HTTP GET list of movies
     def index
       render jsonapi: Movies::UseCases::FetchAll.new.call
@@ -18,7 +19,7 @@ module Api
       if @movie.valid?
         render jsonapi: @movie, status: :created
       else
-        render json: @movie.errors, status: :unprocessable_entity
+        render jsonapi_errors: @movie.errors, status: :unprocessable_entity
       end
     end
 
@@ -29,7 +30,7 @@ module Api
       if @movie.valid?
         render jsonapi: @movie
       else
-        render json: @movie.errors, status: :unprocessable_entity
+        render jsonapi_errors: @movie.errors, status: :unprocessable_entity
       end
     end
 

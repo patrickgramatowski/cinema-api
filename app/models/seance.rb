@@ -1,6 +1,7 @@
 class Seance < ApplicationRecord
   belongs_to :movie
   belongs_to :hall
+  has_many :reservations
 
   validates :date, presence: true
   validates :time, presence: true
