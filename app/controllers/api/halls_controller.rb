@@ -1,6 +1,7 @@
 module Api
   class HallsController < ApplicationController
     include JSONAPI::Fetching
+    include JSONAPI::Errors
     # HTTP GET list of halls
     def index
       render jsonapi: Halls::UseCases::FetchAll.new.call
@@ -18,7 +19,7 @@ module Api
       if @hall.valid?
         render jsonapi: @hall, status: :created
       else
-        render json: @hall.errors, status: :unprocessable_entity
+        render jsonapi_errors: @hall.errors, status: :unprocessable_entity
       end
     end
 
@@ -29,7 +30,7 @@ module Api
       if @hall.valid?
         render jsonapi: @hall
       else
-        render json: @hall.errors, status: :unprocessable_entity
+        render jsonapi_errors: @hall.errors, status: :unprocessable_entity
       end
     end
 
