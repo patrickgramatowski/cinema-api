@@ -1,7 +1,5 @@
 module Api
   class SeancesController < ApplicationController
-    include JSONAPI::Fetching
-    include JSONAPI::Errors
     # HTTP GET list of seances
     def index
       render jsonapi: Seances::UseCases::FetchAll.new.call

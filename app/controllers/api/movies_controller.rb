@@ -1,7 +1,5 @@
 module Api
   class MoviesController < ApplicationController
-    include JSONAPI::Fetching
-    include JSONAPI::Errors
     # HTTP GET list of movies
     def index
       render jsonapi: Movies::UseCases::FetchAll.new.call

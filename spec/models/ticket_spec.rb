@@ -1,28 +1,28 @@
 require 'rails_helper'
 
-RSpec.describe Reservation, type: :model do
+RSpec.describe Ticket, type: :model do
   describe 'validations' do
-    subject { build(:reservation) }
-    context 'has seance_id attribute' do
+    subject { build(:ticket) }
+    context 'has price attribute' do
       it 'must be present' do
         expect(subject).to be_valid
-        subject.seance_id = nil
+        subject.price = nil
         expect(subject).to_not be_valid
       end
     end
 
-    context 'has ticket_desk_id attribute' do
+    context 'has seat attribute' do
       it 'must be present' do
         expect(subject).to be_valid
-        subject.ticket_desk_id = nil
+        subject.seat = nil
         expect(subject).to_not be_valid
       end
     end
 
-    context 'has status attribute' do
+    context 'has ticket_type attribute' do
       it 'must be present' do
         expect(subject).to be_valid
-        subject.status = nil
+        subject.ticket_type = nil
         expect(subject).to_not be_valid
       end
     end

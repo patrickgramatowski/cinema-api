@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_095026) do
+ActiveRecord::Schema.define(version: 2021_06_02_122121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,10 @@ ActiveRecord::Schema.define(version: 2021_06_01_095026) do
     t.bigint "seance_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "ticket_desk_id", null: false
+    t.string "status"
     t.index ["seance_id"], name: "index_reservations_on_seance_id"
+    t.index ["ticket_desk_id"], name: "index_reservations_on_ticket_desk_id"
   end
 
   create_table "seances", force: :cascade do |t|
@@ -48,7 +51,25 @@ ActiveRecord::Schema.define(version: 2021_06_01_095026) do
     t.index ["movie_id"], name: "index_seances_on_movie_id"
   end
 
+  create_table "ticket_desks", force: :cascade do |t|
+    t.boolean "online"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.integer "price"
+    t.string "seat"
+    t.string "ticket_type"
+    t.bigint "reservation_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reservation_id"], name: "index_tickets_on_reservation_id"
+  end
+
   add_foreign_key "reservations", "seances"
+  add_foreign_key "reservations", "ticket_desks"
   add_foreign_key "seances", "halls"
   add_foreign_key "seances", "movies"
+  add_foreign_key "tickets", "reservations"
 end
