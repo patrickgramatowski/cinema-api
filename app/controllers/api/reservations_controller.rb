@@ -1,7 +1,5 @@
 module Api
   class ReservationsController < ApplicationController
-    include JSONAPI::Fetching
-    include JSONAPI::Errors
     # HTTP GET list of reservations
     def index
       render jsonapi: Reservations::UseCases::FetchAll.new.call
@@ -42,7 +40,7 @@ module Api
     private
 
     def reservation_params
-      params.require(:reservation).permit(:seance_id)
+      params.require(:reservation).permit(:seance_id, :ticket_desk_id, :status)
     end
   end
 end
