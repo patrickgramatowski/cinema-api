@@ -7,7 +7,7 @@ module Api
 
     # HTTP GET seance by id
     def show
-      render jsonapi: Seances::UseCases::FetchOne.new.call(id: params[:id])
+      render json: Seances::UseCases::AvailableSeats.new.call(id: params[:id])
     end
 
     # HTTP POST create seance

@@ -26,5 +26,13 @@ RSpec.describe Ticket, type: :model do
         expect(subject).to_not be_valid
       end
     end
+
+    context 'has reservation_id attribute' do
+      it 'must be present' do
+        expect(subject).to be_valid
+        subject.reservation_id = nil
+        expect(subject).to_not be_valid
+      end
+    end
   end
 end

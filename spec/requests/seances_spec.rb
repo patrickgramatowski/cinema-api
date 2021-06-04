@@ -35,7 +35,7 @@ RSpec.describe "Seances requests" do
     let(:hall) { create(:hall).id }
 
     it "works and return status 201" do
-      post("/api/seances", params: { seance: {  date: "2021-05-31", time: "17:00", movie_id: movie, hall_id: hall } } )
+      post("/api/seances", params: { seance: { date: "2021-05-31", time: "17:00", movie_id: movie, hall_id: hall } } )
       expect(response.status).to eq(201)
     end
   end
