@@ -2,19 +2,17 @@ module Api
   class TicketDesksController < ApplicationController
     # HTTP GET list of ticket_desks
     def index
-      render jsonapi: TicketDesk.all
-      #render jsonapi: Ticket_desks::UseCases::FetchAll.new.call
+      render jsonapi: TicketDesks::UseCases::FetchAll.new.call
     end
 
     # HTTP GET ticket_desk by id
     def show
-      render jsonapi: TicketDesk.find(params[:id])
-      #render jsonapi: Ticket_desks::UseCases::FetchOne.new.call(id: params[:id])
+      render jsonapi: TicketDesks::UseCases::FetchOne.new.call(id: params[:id])
     end
 
     # HTTP POST create ticket_desk
     def create
-      @ticket_desk = Ticket_desks::UseCases::Create.new.call(params: ticket_desk_params)
+      @ticket_desk = TicketDesks::UseCases::Create.new.call(params: ticket_desk_params)
 
       if @ticket_desk.valid?
         render jsonapi: @ticket_desk, status: :created
@@ -25,7 +23,7 @@ module Api
 
     # HTTP PUT update the halls ticket_desk
     def update
-      @ticket_desk = Ticket_desks::UseCases::Update.new.call(id: params[:id], params: ticket_desk_params)
+      @ticket_desk = TicketDesks::UseCases::Update.new.call(id: params[:id], params: ticket_desk_params)
 
       if @ticket_desk.valid?
         render jsonapi: @ticket_desk
@@ -36,7 +34,7 @@ module Api
 
     # HTTP DELETE destroy the ticket_desk
     def destroy
-      Ticket_desks::UseCases::Delete.new.call(id: params[:id])
+      TicketDesks::UseCases::Delete.new.call(id: params[:id])
     end
 
     private
