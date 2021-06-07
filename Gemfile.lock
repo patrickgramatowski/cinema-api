@@ -67,6 +67,11 @@ GEM
     byebug (11.1.3)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
+    delayed_job (4.1.9)
+      activesupport (>= 3.0, < 6.2)
+    delayed_job_active_record (4.1.6)
+      activerecord (>= 3.0, < 6.2)
+      delayed_job (>= 3.0, < 5)
     diff-lcs (1.4.4)
     erubi (1.10.0)
     factory_bot (6.2.0)
@@ -203,6 +208,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
+  delayed_job_active_record
   factory_bot_rails
   jsonapi.rb
   pg (~> 1.1)
