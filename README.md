@@ -1,7 +1,7 @@
 # RubyCamp Monterail API
     
-Must have    
-Functional requirements:    
+## Must have    
+### Functional requirements:    
    
 - [x] Endpoint to buy tickets/create reservation from ticket desk   
 - [ ] Endpoint to buy tickets/create reservation from online application   
@@ -13,16 +13,18 @@ Functional requirements:
 - [ ] Application should have implemented authentication (there should be logging by user and by employer)   
 - [ ] Application should have authorization in terms of role-based separation   
 - [ ] Regular user should have ability to create only online reservation   
-- [ ] Employer should have ability to create online reservation but also offline reservation   
-Not functional requirements:  
+- [ ] Employer should have ability to create online reservation but also offline reservation
+     
+### Not functional requirements:  
    
 - [x] API should be documented    
 - [ ] Application should have provided seeds and should be generally operational   
 - [x] At least 80% of tests coverage    
 - [ ] Application should have connected Sentry and CircleCI   
 - [ ] Application should be accessible publicly (for instance by Heroku)   
-- [x] Application should have configured rubocop and should fulfill all rubocop requirements.   
-Nice to have:   
+- [x] Application should have configured rubocop and should fulfill all rubocop requirements. 
+      
+### Nice to have:   
    
 - [x] JSON:API endpoint   
 - [ ] GraphQL endpoint  
