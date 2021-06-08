@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Seance < ApplicationRecord
   belongs_to :movie
   belongs_to :hall

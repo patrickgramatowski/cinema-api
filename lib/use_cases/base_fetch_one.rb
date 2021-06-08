@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UseCases
   class BaseFetchOne
     attr_reader :repository

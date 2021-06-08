@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HallSerializer
   include JSONAPI::Serializer
   attributes :hall, :seats

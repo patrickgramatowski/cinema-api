@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class HallsController < ApplicationController
     # HTTP GET list of halls

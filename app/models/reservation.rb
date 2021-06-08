@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reservation < ApplicationRecord
   belongs_to :seance
   belongs_to :ticket_desk

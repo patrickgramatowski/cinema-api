@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class TicketDesksController < ApplicationController
     # HTTP GET list of ticket_desks

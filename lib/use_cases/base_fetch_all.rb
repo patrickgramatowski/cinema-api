@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UseCases
   class BaseFetchAll
     attr_reader :repository

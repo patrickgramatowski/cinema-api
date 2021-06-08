@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SeanceSerializer
   include JSONAPI::Serializer
   attributes :date, :time, :hall, :movie

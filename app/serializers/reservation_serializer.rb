@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReservationSerializer
   include JSONAPI::Serializer
   attributes :seance, :ticket_desk, :status, :tickets
