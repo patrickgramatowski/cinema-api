@@ -15,6 +15,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'jsonapi.rb'
 # Background Job
 gem 'delayed_job_active_record'
+gem 'simplecov', require: false, group: :test
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
