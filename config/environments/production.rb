@@ -1,6 +1,9 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.force_ssl = true
+  config.session_store :active_record_store
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
