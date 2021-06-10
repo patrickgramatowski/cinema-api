@@ -1,0 +1,16 @@
+---
+config:
+  :verbose: false
+  :output: tabular
+  :mvc: ''
+  :gemfile_scan: false
+  :gemfile_name: ''
+  :filename: 
+  :debug: false
+  :exit_on_warn: false
+  :enabled_checks:
+  - :generic_check
+  - :code_quality
+  - :bulletin
+  - :code_style
+  - :owasp_top_10

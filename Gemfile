@@ -16,6 +16,7 @@ gem 'jsonapi.rb'
 # Background Job
 gem 'delayed_job_active_record'
 gem 'simplecov', require: false, group: :test
+gem 'activerecord-session_store'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -31,6 +32,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'brakeman'
+  gem 'dawnscanner', :require => false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
