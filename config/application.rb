@@ -24,5 +24,6 @@ module CinemaApi
     config.paths.add 'lib', eager_load: true
     config.api_only = true
     config.active_job.queue_adapter = :delayed_job
+    config.session_store :active_record_store
   end
 end
