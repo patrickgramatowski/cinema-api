@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'activerecord-session_store'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 # Use postgresql as the database for Active Record
@@ -16,9 +17,9 @@ gem 'jsonapi.rb'
 # Background Job
 gem 'delayed_job_active_record'
 gem 'simplecov', require: false, group: :test
-gem 'activerecord-session_store'
 
 group :development, :test do
+  gem 'bundler-audit', '~> 0.8.0'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Factory bot gem
