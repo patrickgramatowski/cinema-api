@@ -71,6 +71,9 @@ GEM
       msgpack (~> 1.0)
     brakeman (5.0.4)
     builder (3.2.4)
+    bundler-audit (0.8.0)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 1.0)
     byebug (11.1.3)
     concurrent-ruby (1.1.9)
     crass (1.0.6)
@@ -262,6 +265,7 @@ DEPENDENCIES
   activerecord-session_store
   bootsnap (>= 1.4.4)
   brakeman
+  bundler-audit (~> 0.8.0)
   byebug
   dawnscanner
   delayed_job_active_record
