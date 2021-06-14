@@ -36,13 +36,14 @@ module Api
 
     # HTTP DELETE destroy the reservation
     def destroy
+      Reservations::UseCases::FetchOne.new.call(id: params[:id]).tickets.map(&:destroy)
       Reservations::UseCases::Delete.new.call(id: params[:id])
     end
 
     private
 
     def reservation_params
-      params.require(:reservation).permit(:seance_id, :ticket_desk_id, :status, :seats)
+      params.require(:reservation).permit(:seance_id, :ticket_desk_id, :status, :seats, tickets_attributes: [:ticket_type, :price, :seat, :_destroy])
     end
   end
 end
