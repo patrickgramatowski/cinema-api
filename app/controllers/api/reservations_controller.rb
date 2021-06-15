@@ -20,8 +20,9 @@ module Api
 
     # HTTP POST create reservation offline
     def create_offline
-      @reservation = Reservations::UseCases::CreateOffline.new.call(params: offline_reservation_params)
+      @reservation = Reservations::UseCases::CreateOffline.new.call(params: reservation_params)
       check_if_valid(@reservation)
+      puts @reservation.status
     end
 
     # HTTP PUT update the halls reservation
@@ -48,10 +49,6 @@ module Api
       else
         render jsonapi_errors: reservation.errors, status: :unprocessable_entity
       end
-    end
-
-    def offline_reservation_params
-      params.permit(:seance_id, :ticket_desk_id, :seats)
     end
 
     def reservation_params
