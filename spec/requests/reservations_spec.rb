@@ -44,6 +44,14 @@ RSpec.describe "Reservations requests" do
     end
   end
 
+  describe "POST /api/ticket_desks/:id/offline" do
+    let!(:seance) { create(:seance).id }
+    it "works and return status 201" do
+      post("/api/ticket_desks/#{ticket_desk}/offline", params: { reservation: { seance_id: seance, ticket_desk_id: ticket_desk, seats: "A2" } })
+      expect(response.status).to eq(201)
+    end
+  end
+
   describe "POST /api/reservations" do
     it "does not work and return status 422" do
       post("/api/reservations", params: { reservation: { seance_id: nil } } )
