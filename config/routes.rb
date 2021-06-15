@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :tickets
     end
 
+    resources :ticket_desks, only: %i[index create update destroy]
     resources :ticket_desks, only: [:show] do
       post '/offline', to: 'reservations#create_offline'
     end
