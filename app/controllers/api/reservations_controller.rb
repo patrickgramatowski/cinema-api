@@ -12,15 +12,16 @@ module Api
       render jsonapi: Reservations::UseCases::FetchOne.new.call(id: params[:id])
     end
 
-    # HTTP POST create reservation
+    # HTTP POST create reservation online
     def create
       @reservation = Reservations::UseCases::Create.new.call(params: reservation_params)
+      check_if_valid(@reservation)
+    end
 
-      if @reservation.valid?
-        render jsonapi: @reservation, status: :created
-      else
-        render jsonapi_errors: @reservation.errors, status: :unprocessable_entity
-      end
+    # HTTP POST create reservation offline
+    def create_offline
+      @reservation = Reservations::UseCases::CreateOffline.new.call(params: offline_reservation_params)
+      check_if_valid(@reservation)
     end
 
     # HTTP PUT update the halls reservation
@@ -40,6 +41,18 @@ module Api
     end
 
     private
+
+    def check_if_valid(reservation)
+      if reservation.valid?
+        render jsonapi: reservation, status: :created
+      else
+        render jsonapi_errors: reservation.errors, status: :unprocessable_entity
+      end
+    end
+
+    def offline_reservation_params
+      params.permit(:seance_id, :ticket_desk_id, :seats)
+    end
 
     def reservation_params
       params.require(:reservation).permit(:seance_id, :ticket_desk_id, :status, :seats)
