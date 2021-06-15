@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   namespace :api do
     resources :halls, :movies, :seances
     
+    resources :reservations do 
+      resources :tickets
+    end
+
     resources :ticket_desks do
-      resources :reservations do 
-        resources :tickets
-      end
+      post '/offline', to: 'reservations#create_offline'
     end
   end
 end
