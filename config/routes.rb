@@ -3,10 +3,13 @@ Rails.application.routes.draw do
   namespace :api do
     resources :halls, :movies, :seances
     
-    resources :ticket_desks do
-      resources :reservations do 
-        resources :tickets
-      end
+    resources :reservations do 
+      resources :tickets
+    end
+
+    resources :ticket_desks, only: %i[index create update destroy]
+    resources :ticket_desks, only: [:show] do
+      post '/offline', to: 'reservations#create_offline'
     end
   end
 end
