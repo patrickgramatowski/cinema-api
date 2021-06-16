@@ -6,7 +6,9 @@ class Reservation < ApplicationRecord
   has_many :tickets
 
   validates :seance_id, presence: true
-  validates :seats, presence: true
-  validates :ticket_desk_id, presence: true
   validates :status, presence: true
+
+  def expired?
+    reservation.status == "paid" && seance.after_confirmation_time?
+  end
 end
