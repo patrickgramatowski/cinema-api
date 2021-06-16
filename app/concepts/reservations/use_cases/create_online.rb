@@ -2,7 +2,7 @@
 
 module Reservations
   module UseCases
-    class Create
+    class CreateOnline
       attr_reader :repository, :params
 
       def initialize(params:, repository: Reservations::Repository.new)
@@ -24,8 +24,8 @@ module Reservations
       def reservation_params
         {
           seance_id: params[:seance_id],
-          ticket_desk_id: params[:ticket_desk_id],
-          status: "paid"
+          ticket_desk_id: TicketDesk.where(online: true).first.id,
+          status: "pending"
         }
       end
 
