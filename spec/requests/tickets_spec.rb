@@ -35,38 +35,4 @@ RSpec.describe "Tickets requests" do
       expect(response.status).to eq(200)
     end
   end
-
-  describe "POST /api/reservations/:id/tickets" do
-    let(:reservation) { create(:reservation) }
-
-    it "works and return status 201" do
-      post("/api/reservations/#{reservation.id}/tickets", params: { ticket: { price: 22, ticket_type: "Normal", seat: "1A", reservation_id: reservation.id  } } )
-      expect(response.status).to eq(201)
-    end
-  end
-
-  describe "POST /api/reservations/:id/tickets" do
-    it "does not work and return status 422" do
-      post("/api/reservations/#{reservation}/tickets", params: { ticket: { price: 11 } } )
-      expect(response.status).to eq(422)
-    end
-  end
-
-  describe 'PUT /api/reservations/:id/tickets/:id' do
-    let!(:ticket) { create(:ticket) }
-
-    it 'works and returns status 200' do
-      put("/api/reservations/#{reservation}/tickets/#{ticket.id}", params: { ticket: { price: 111 } })
-      expect(response.status).to eq(200)
-    end
-  end
-
-  describe 'DELETE /api/reservations/:id/tickets/:id' do
-    let!(:ticket) { create(:ticket) }
-
-    it 'works and return status 204' do
-      delete("/api/reservations/#{reservation}/tickets/#{ticket.id}")
-      expect(response.status).to eq(204)
-    end
-  end
 end

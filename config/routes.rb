@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   # JSON:API
   namespace :api do
-    resources :halls, :movies, :seances
-    
-    resources :reservations do 
-      resources :tickets
-    end
+    resources :halls, :movies, :seances, :ticket_desks
 
-    resources :ticket_desks, only: %i[index create update destroy]
-    resources :ticket_desks, only: [:show] do
-      post '/offline', to: 'reservations#create_offline'
+    resources :reservations, only: %i[index show update destroy] do 
+      resources :tickets
+
+      collection do
+        post '/offline', to: 'reservations#create'
+        post '/online', to: 'reservations#create_online'
+      end
     end
   end
 end
