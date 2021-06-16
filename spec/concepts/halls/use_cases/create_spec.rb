@@ -15,7 +15,7 @@ RSpec.describe Halls::UseCases::Create do
     end
 
     it "creates hall record" do
-      expect { instance.call(params: params) }.to change { Hall.count }.from(0).to(1)
+      expect { instance.call(params: params) }.to change { Hall.count }.from(1).to(2)
     end
 
     it "returns hall" do

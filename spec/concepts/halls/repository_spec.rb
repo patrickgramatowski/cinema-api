@@ -10,7 +10,7 @@ RSpec.describe Halls::Repository do
     let!(:hall_5) { create :hall }
 
     it "returns one hall" do
-      expect(instance.find_all).to eq([hall_1, hall_2, hall_3, hall_4, hall_5])
+      expect(instance.find_all).to eq([Hall.first,hall_1, hall_2, hall_3, hall_4, hall_5])
     end
   end
 end
