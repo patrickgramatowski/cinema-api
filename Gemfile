@@ -34,7 +34,7 @@ end
 
 group :development do
   gem 'brakeman'
-  gem 'dawnscanner', :require => false
+  gem 'dawnscanner', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -28,4 +28,4 @@ Layout/EndOfLine:
 
 Layout/LineLength:
   Exclude:
-    - 'app/concpets/reservations/use_cases/available_seats.rb'
+    - 'app/concepts/seances/use_cases/available_seats.rb'
