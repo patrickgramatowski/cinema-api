@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, defaults: { format: :jsonapi }
   # JSON:API
-  namespace :api do
+  namespace :api, defaults: { format: :json } do
     resources :halls, :movies, :seances, :ticket_desks
+
+    resources :users, only: %w[show]
 
     resources :reservations, only: %i[index show update destroy] do 
       resources :tickets
@@ -13,4 +14,17 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  devise_for :users,
+    defaults: { format: :json },
+    path: '',
+    path_names: {
+      sign_in: 'api/login',
+      sign_out: 'api/logout',
+      registration: 'api/signup'
+    },
+    controllers: {
+      sessions: 'sessions',
+      registrations: 'registrations'
+    }
 end
