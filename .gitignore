@@ -28,3 +28,4 @@
 coverage
 security_brakeman.html
 dawn_info.html
+/config/credentials/development.key

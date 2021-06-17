@@ -2,6 +2,8 @@
 
 module Api
   class ReservationsController < ApplicationController
+    before_action :authenticate_user!
+
     # HTTP GET list of reservations
     def index
       render jsonapi: Reservations::UseCases::FetchAll.new.call
