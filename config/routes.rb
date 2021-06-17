@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, defaults: { format: :jsonapi }
   # JSON:API
   namespace :api do
     resources :halls, :movies, :seances, :ticket_desks
