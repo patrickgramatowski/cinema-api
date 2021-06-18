@@ -27,6 +27,11 @@ Rails.application.routes.draw do
     },
     controllers: {
       reservations: 'reservations',
+      tickets: 'tickets',
+      halls: 'halls',
+      movies: 'movies',
+      ticket_desks: 'ticket_desks',
+      seances: 'seances',
       sessions: 'sessions',
       registrations: 'registrations'
     }
