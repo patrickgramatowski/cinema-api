@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       registration: 'api/signup'
     },
     controllers: {
+      reservations: 'reservations',
       sessions: 'sessions',
       registrations: 'registrations'
     }
