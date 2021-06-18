@@ -2,6 +2,10 @@
 
 module Api
   class SeancesController < ApplicationController
+    before_action :authenticate_user!, only: %i[show index]
+    before_action :check_permission, except: %i[show index]
+
+
     # HTTP GET list of seances
     def index
       render jsonapi: Seances::UseCases::FetchAll.new.call

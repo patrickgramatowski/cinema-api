@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class Api::UsersController < Api::BaseController
   before_action :find_user, only: %w[show]
