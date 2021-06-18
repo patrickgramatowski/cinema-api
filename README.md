@@ -18,7 +18,7 @@
 ### Not functional requirements:  
    
 - [x] API should be documented    
-- [ ] Application should have provided seeds and should be generally operational   
+- [x] Application should have provided seeds and should be generally operational   
 - [x] At least 80% of tests coverage    
 - [ ] Application should have connected Sentry and CircleCI   
 - [ ] Application should be accessible publicly (for instance by Heroku)   
