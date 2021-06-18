@@ -27,7 +27,7 @@ module Reservations
           seance_id: params[:seance_id],
           ticket_desk_id: params[:ticket_desk_id],
           status: "paid",
-          user_id: user
+          user_id: user # todo seed - abstarct user
         }
       end
 

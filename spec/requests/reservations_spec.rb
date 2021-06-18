@@ -9,17 +9,35 @@ RSpec.describe "Reservations requests" do
   describe "GET /api/reservations" do
     let!(:reservation) { build(:reservation) }
 
-    it "works and return status 200" do
+    it "doesnt work for not employee" do
       get("/api/reservations", headers: setup_request(user_1))
-      expect(response.status).to eq(200)
+      expect(response.status).to eq(302)
     end
   end
 
   describe "GET /api/reservations/:id" do
     let!(:reservation) { build(:reservation) }
 
-    it "works and return status 200" do
+    it "redirects" do
       get("/api/reservations/#{reservation.id}", headers: setup_request(user_1))
+      expect(response.status).to eq(302)
+    end
+  end
+
+  describe "GET /api/reservations/ushow/:id" do
+    let!(:reservation) { build(:reservation) }
+
+    it "works and returns 200" do
+      get("/api/reservations/ushow/#{reservation.id}", headers: setup_request(user_1))
+      expect(response.status).to eq(200)
+    end
+  end
+
+  describe "GET /api/reservations/uindex" do
+    let!(:reservation) { build(:reservation) }
+
+    it "works and returns 200" do
+      get("/api/reservations/uindex", headers: setup_request(user_1))
       expect(response.status).to eq(200)
     end
   end
@@ -84,7 +102,7 @@ RSpec.describe "Reservations requests" do
     let!(:reservation) { create(:reservation) }
 
     it 'works and return status 204' do
-      delete("/api/reservations/#{reservation.id}", headers: setup_request(user_1))
+      delete("/api/reservations/#{reservation.id}", headers: setup_request(user_2))
       expect(response.status).to eq(204)
     end
   end
