@@ -3,11 +3,12 @@
 module Reservations
   module UseCases
     class Create
-      attr_reader :repository, :params
+      attr_reader :repository, :params, :user
 
-      def initialize(params:, repository: Reservations::Repository.new)
+      def initialize(params:, user:, repository: Reservations::Repository.new)
         @repository = repository
         @params = params
+        @user = user
       end
 
       def call
@@ -25,7 +26,8 @@ module Reservations
         {
           seance_id: params[:seance_id],
           ticket_desk_id: params[:ticket_desk_id],
-          status: "paid"
+          status: "paid",
+          user_id: user
         }
       end
 
