@@ -84,7 +84,7 @@ RSpec.describe "Reservations requests" do
     let!(:reservation) { create(:reservation) }
 
     it 'works and return status 204' do
-      delete("/api/reservations/#{reservation.id}", headers: setup_request(user_1))
+      delete("/api/reservations/#{reservation.id}", headers: setup_request(user_2))
       expect(response.status).to eq(204)
     end
   end
