@@ -29,7 +29,7 @@
 - [x] JSON:API endpoint   
 - [ ] GraphQL endpoint  
 - [ ] File upload (for instance avatar for user?)  
-- [ ] Other functionalities like adding new movies, screenings, cinema halls   
+- [x] Other functionalities like adding new movies, screenings, cinema halls   
 
 ## Technologies:
 - Ruby 2.7.3
