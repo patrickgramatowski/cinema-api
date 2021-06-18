@@ -2,6 +2,8 @@
 
 module Api
   class HallsController < ApplicationController
+    before_action :check_permission
+
     # HTTP GET list of halls
     def index
       render jsonapi: Halls::UseCases::FetchAll.new.call

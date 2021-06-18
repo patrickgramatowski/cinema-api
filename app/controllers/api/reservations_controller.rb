@@ -74,13 +74,5 @@ module Api
     def offline_params
       params.permit(:seance_id, :ticket_desk_id, :status, tickets: %i[seat price ticket_type])
     end
-
-    def correct_user
-      current_user.employee.eql?(true)
-    end
-
-    def check_permission
-      redirect_back(fallback_location: api_seances_path) unless correct_user
-    end
   end
 end

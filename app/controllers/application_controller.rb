@@ -5,6 +5,14 @@ class ApplicationController < ActionController::API
   include JSONAPI::Fetching
   include JSONAPI::Errors
 
+  def correct_user
+    current_user.employee.eql?(true)
+  end
+
+  def check_permission
+    redirect_back(fallback_location: api_seances_path) unless correct_user
+  end
+
   # Devise-jwt
   include ActionController::MimeResponds
 

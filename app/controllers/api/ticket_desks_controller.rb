@@ -2,6 +2,8 @@
 
 module Api
   class TicketDesksController < ApplicationController
+    before_action :check_permission
+
     # HTTP GET list of ticket_desks
     def index
       render jsonapi: TicketDesks::UseCases::FetchAll.new.call
