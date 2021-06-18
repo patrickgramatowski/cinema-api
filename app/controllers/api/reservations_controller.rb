@@ -2,7 +2,8 @@
 
 module Api
   class ReservationsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: %i[show index destroy create_online]
+    before_action :employee?, only: %i[update create destroy show index create_online]
 
     # HTTP GET list of reservations
     def index
@@ -16,13 +17,13 @@ module Api
 
     # HTTP POST create reservation offline
     def create
-      @reservation = Reservations::UseCases::Create.new(params: offline_params).call
+      @reservation = Reservations::UseCases::Create.new(params: offline_params, user: current_user.id).call
       check_if_valid(@reservation)
     end
 
     # HTTP POST create reservation online
     def create_online
-      @reservation = Reservations::UseCases::CreateOnline.new(params: online_params).call
+      @reservation = Reservations::UseCases::CreateOnline.new(params: online_params, user: current_user.id).call
       check_if_valid(@reservation)
     end
 
@@ -59,11 +60,15 @@ module Api
     end
 
     def online_params
-      params.permit(:seance_id, tickets: %i[seat price ticket_type])
+      params.permit(:seance_id, tickets: %i[seat ticket_type])
     end
 
     def offline_params
       params.permit(:seance_id, :ticket_desk_id, :status, tickets: %i[seat price ticket_type])
+    end
+
+    def employee?
+      current_user.employee.eql?(true)
     end
   end
 end
