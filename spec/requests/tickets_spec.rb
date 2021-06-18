@@ -1,8 +1,11 @@
 require "rails_helper"
 require "rspec_api_documentation/dsl"
+require "devise/jwt/test_helpers"
 
 RSpec.describe "Tickets requests" do
   let(:reservation) { create(:reservation).id }
+  let(:user_1) { create(:user, employee: false) }
+  let(:user_2) { create(:user, employee: true) }
 
   before do
     reservation
@@ -12,18 +15,13 @@ RSpec.describe "Tickets requests" do
     let!(:ticket) { build(:ticket) }
 
     it "works and return status 200" do
-      get("/api/reservations/#{reservation}/tickets")
+      get("/api/reservations/#{reservation}/tickets", headers: setup_request(user_2))
       expect(response.status).to eq(200)
     end
-  end
 
-  resource "tickets" do
-    get("/api/reservations/1/tickets") do
-      example "Gets list of tickets" do
-        do_request
-        
-        expect(status).to eq(200)
-      end
+    it "redirects and returns 302" do
+      get("/api/reservations/#{reservation}/tickets", headers: setup_request(user_1))
+      expect(response.status).to eq(302)
     end
   end
 
@@ -31,8 +29,20 @@ RSpec.describe "Tickets requests" do
     let!(:ticket) { build(:ticket) }
 
     it "works and return status 200" do
-      get("/api/reservations/#{reservation}/tickets/#{ticket.id}")
+      get("/api/reservations/#{reservation}/tickets/#{ticket.id}", headers: setup_request(user_2))
       expect(response.status).to eq(200)
     end
+
+    it "redirects returns 302" do
+      get("/api/reservations/#{reservation}/tickets/#{ticket.id}", headers: setup_request(user_1))
+      expect(response.status).to eq(302)
+    end
   end
+end
+
+private
+
+def setup_request(user)
+  headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
+  auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
 end
