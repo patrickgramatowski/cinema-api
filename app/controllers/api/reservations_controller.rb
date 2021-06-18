@@ -67,10 +67,6 @@ module Api
       params.permit(:seance_id, :ticket_desk_id, :status, tickets: %i[seat price ticket_type])
     end
 
-    def employee?
-      current_user.employee.eql?(true)
-    end
-
     def correct_user
       current_user.employee.eql?(true)
     end
