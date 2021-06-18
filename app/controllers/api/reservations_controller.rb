@@ -3,7 +3,7 @@
 module Api
   class ReservationsController < ApplicationController
     before_action :authenticate_user!, only: %i[show index destroy create_online]
-    before_action :employee?, only: %i[update create destroy show index create_online]
+    before_action :check_permission, only: %i[update create]
 
     # HTTP GET list of reservations
     def index
@@ -69,6 +69,14 @@ module Api
 
     def employee?
       current_user.employee.eql?(true)
+    end
+
+    def correct_user
+      current_user.employee.eql?(true)
+    end
+
+    def check_permission
+      redirect_back(fallback_location: api_seances_path) unless correct_user
     end
   end
 end
