@@ -1,0 +1,45 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@0.1.2 
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0.0
+      - image: circleci/postgres:12.2
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: try
+          POSTGRES_DB: "db"
+          POSTGRES_HOST_AUTH_METHOD: "trust"
+    executor: ruby/default
+    steps:
+      - checkout
+      - run:
+          name: Install bundler
+          command: gem install bundler
+      - run:
+          name: Install simplecov 
+          command: gem install simplecov
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
+      - run:
+          name: Database Setup
+          command: bundle exec rake db:create RAILS_ENV=test --auth-local --trace 
+      - run:
+          name: Database Structure load
+          command: bundle exec rake db:structure:load RAILS_ENV=test --trace
+      - checkout
+      - run: gem install rspec
+      - run: bundle exec rake db:migrate RAILS_ENV=test --trace
+      - store_test_results:
+          path: test-results
+
+      - store_artifacts:
+          path: coverage
