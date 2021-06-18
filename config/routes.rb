@@ -6,9 +6,11 @@ Rails.application.routes.draw do
     resources :users, only: %w[show]
 
     resources :reservations, only: %i[index show update destroy] do 
-      resources :tickets
+      resources :tickets, only: %i[show index]
 
       collection do
+        get '/uindex', to: 'reservations#user_index'
+        get '/ushow', to: 'reservations#user_show'
         post '/offline', to: 'reservations#create'
         post '/online', to: 'reservations#create_online'
       end

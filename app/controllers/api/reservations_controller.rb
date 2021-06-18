@@ -2,12 +2,20 @@
 
 module Api
   class ReservationsController < ApplicationController
-    before_action :authenticate_user!, only: %i[show index destroy create_online]
-    before_action :check_permission, only: %i[update create]
+    before_action :authenticate_user!, only: %i[user_index user_show create_online]
+    before_action :check_permission, except: %i[user_index user_show create_online]
 
     # HTTP GET list of reservations
     def index
       render jsonapi: Reservations::UseCases::FetchAll.new.call
+    end
+
+    def user_index
+      render jsonapi: Reservations::UseCases::FetchAllForUser.new(user_id: current_user.id).call
+    end
+
+    def user_show
+      render jsonapi: Reservations::UseCases::FetchOneForUser.new(user_id: current_user.id, reservation_id: params[:id]).call
     end
 
     # HTTP GET reservation by id
