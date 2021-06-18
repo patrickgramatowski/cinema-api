@@ -37,8 +37,15 @@ RSpec.describe "Reservations requests" do
     let(:seance) { create(:seance, id: 102) }
     let(:ticket_desk) { create(:ticket_desk, id: 102) }
     it "works and return status 201" do
-      post("/api/reservations/offline", headers: setup_request(user_1), params: { seance_id: seance.id, status: "pending", ticket_desk_id: ticket_desk.id, tickets: [{ seat: '5C', ticket_type: "normal", price: 22 }] }.to_json)
+      post("/api/reservations/offline", headers: setup_request(user_2), params: { seance_id: seance.id, status: "pending", ticket_desk_id: ticket_desk.id, tickets: [{ seat: '5C', ticket_type: "normal", price: 22 }] }.to_json)
       expect(response.status).to eq(201)
+    end
+
+    context "when user is not employee" do
+      it "works and return status 302" do
+        post("/api/reservations/offline", headers: setup_request(user_1), params: { seance_id: seance.id, status: "pending", ticket_desk_id: ticket_desk.id, tickets: [{ seat: '5C', ticket_type: "normal", price: 22 }] }.to_json)
+        expect(response.status).to eq(302)
+      end
     end
   end
 
@@ -58,9 +65,18 @@ RSpec.describe "Reservations requests" do
   describe 'PUT /api/reservations/:id' do
     let!(:reservation) { create(:reservation) }
 
-    it 'works and returns status 200' do
-      put("/api/reservations/#{reservation.id}", headers: setup_request(user_1), params: { reservation: { id: reservation.id, status: "paid" } }.to_json)
-      expect(response.status).to eq(200)
+    context "when user is not employee" do
+      it 'works and returns status 302' do
+        put("/api/reservations/#{reservation.id}", headers: setup_request(user_1), params: { reservation: { id: reservation.id, status: "paid" } }.to_json)
+        expect(response.status).to eq(302)
+      end
+    end
+
+    context "when user is an employee" do
+      it "works and return status 200" do
+        put("/api/reservations/#{reservation.id}", headers: setup_request(user_2), params: { reservation: { id: reservation.id, status: "paid" } }.to_json)
+        expect(response.status).to eq(200)
+      end
     end
   end
 
