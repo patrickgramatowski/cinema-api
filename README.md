@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/patrickgramatowski/cinema-api.svg?branch=master)](https://travis-ci.com/patrickgramatowski/cinema-api)    
 # RubyCamp Monterail API
     
 ## Must have    
@@ -20,7 +21,7 @@
 - [x] API should be documented    
 - [x] Application should have provided seeds and should be generally operational   
 - [x] At least 80% of tests coverage    
-- [ ] Application should have connected Sentry and CircleCI   
+- [x] Application should have connected Sentry and CircleCI (TravisCI added)     
 - [x] Application should be accessible publicly (for instance by Heroku) [Heroku](https://cinema-api-ruby.herokuapp.com/api/movies)   
 - [x] Application should have configured rubocop and should fulfill all rubocop requirements. 
       
