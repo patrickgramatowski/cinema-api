@@ -7,9 +7,9 @@
 - [x] Endpoint to buy tickets/create reservation from ticket desk   
 - [x] Endpoint to buy tickets/create reservation from online application   
 - [x] There should be mechanism (Cronjob? Background job?) to terminate reservation if somebody did not pay ~30 minutes before screening (for reservations created by online application)    
-- [ ] There should be email communication provided:    
-- [ ] When reservation is created (tickets, seats and price should be attached)   
-- [ ] When reservation is terminated (the reason should be attached)   
+- [x] There should be email communication provided:    
+- [x] When reservation is created (tickets, seats and price should be attached)   
+- [x] When reservation is terminated (the reason should be attached)   
 - [x] Creating reservation should be robust and there should be validations (for instance - for already taken seats etc., - consider edge cases).   
 - [x] Application should have implemented authentication (there should be logging by user and by employer)   
 - [x] Application should have authorization in terms of role-based separation   
