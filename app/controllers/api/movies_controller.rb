@@ -2,7 +2,6 @@
 
 module Api
   class MoviesController < ApplicationController
-    before_action :authenticate_user!, only: %i[show index]
     before_action :check_permission, except: %i[show index]
 
     # HTTP GET list of movies
