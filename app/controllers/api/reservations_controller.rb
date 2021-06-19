@@ -32,6 +32,7 @@ module Api
     # HTTP POST create reservation online
     def create_online
       @reservation = Reservations::UseCases::CreateOnline.new(params: online_params, user: current_user.id).call
+      ReservationMailer.reservation_information(current_user.email, @reservation).deliver_now
       check_if_valid(@reservation)
     end
 
