@@ -11,5 +11,3 @@ services:
   - postgresql
 before_script:
   - cp config/database.yml.travis config/database.yml
-  - rails db:create RAILS_ENV=test
-  - rails db:migrate RAILS_ENV=test
