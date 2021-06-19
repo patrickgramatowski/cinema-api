@@ -45,6 +45,7 @@ gem "devise"
 gem "devise-jwt"
 
 gem "sidekiq", "~> 6.2"
+gem 'rspec-sidekiq', '~> 3.1'
 
 gem "sentry-ruby"
 gem "sentry-rails"
