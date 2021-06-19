@@ -15,3 +15,4 @@ script:
   - bundle exec rake test
   - bundle exec rake test:system
 dist: xenial
+os: windows
