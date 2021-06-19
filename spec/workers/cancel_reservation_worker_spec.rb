@@ -19,12 +19,11 @@ RSpec.describe CancelReservationWorker, type: :worker do
       end.to change(described_class.jobs, :size).by(1)
       described_class.new.perform(reservation.id)
     end
-    context 'occurs daily' do
-      it 'occurs at expected time' do
-        scheduled_job
-        expect(described_class.jobs.last['jid'].include?(scheduled_job)).to eql(true)
-        expect(described_class).to have_enqueued_sidekiq_job(reservation.id)
-      end
+
+    it 'occurs at expected time' do
+      scheduled_job
+      expect(described_class.jobs.last['jid'].include?(scheduled_job)).to eql(true)
+      expect(described_class).to have_enqueued_sidekiq_job(reservation.id)
     end
   end
 end
