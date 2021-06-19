@@ -122,6 +122,19 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faraday (1.4.2)
+      faraday-em_http (~> 1.0)
+      faraday-em_synchrony (~> 1.0)
+      faraday-excon (~> 1.1)
+      faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords (>= 0.0.4)
+    faraday-em_http (1.0.0)
+    faraday-em_synchrony (1.0.0)
+    faraday-excon (1.1.0)
+    faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
     ffi (1.15.1-x64-mingw32)
     ffi-win32-extensions (1.0.4)
       ffi
@@ -152,6 +165,7 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
+    multipart-post (2.1.1)
     mustache (1.1.1)
     nio4r (2.5.7)
     nokogiri (1.11.7-x64-mingw32)
@@ -244,8 +258,19 @@ GEM
     rubocop-ast (1.7.0)
       parser (>= 3.0.1.1)
     ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.4)
     ruby_parser (3.16.0)
       sexp_processor (~> 4.15, >= 4.15.1)
+    sentry-rails (4.4.0)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 4.4.0.pre.beta)
+    sentry-ruby (4.4.2)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      faraday (>= 1.0)
+      sentry-ruby-core (= 4.4.2)
+    sentry-ruby-core (4.4.2)
+      concurrent-ruby
+      faraday
     sexp_processor (4.15.3)
     sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
@@ -317,6 +342,8 @@ DEPENDENCIES
   rspec-rails (~> 5.0.0)
   rspec_api_documentation
   rubocop (~> 1.15)
+  sentry-rails
+  sentry-ruby
   sidekiq (~> 6.2)
   simplecov
   tzinfo-data
