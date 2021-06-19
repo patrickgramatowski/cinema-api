@@ -11,6 +11,6 @@ class Reservation < ApplicationRecord
   validates :status, presence: true
 
   def expired?
-    reservation.status == "paid" && seance.after_confirmation_time?
+    status == "pending" && seance.after_confirmation_time?
   end
 end
