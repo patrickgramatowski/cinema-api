@@ -13,6 +13,16 @@ RSpec.describe "Seances requests" do
       get("/api/seances", headers: setup_request(user_1))
       expect(response.status).to eq(200)
     end
+
+    it "works and return status 200" do
+      get("/api/seances", headers: setup_request(user_2))
+      expect(response.status).to eq(200)
+    end
+
+    it "works and return status 200" do
+      get("/api/seances")
+      expect(response.status).to eq(200)
+    end
   end
 
   describe "GET /api/seances/:id" do
@@ -20,6 +30,16 @@ RSpec.describe "Seances requests" do
 
     it "works and return status 200" do
       get("/api/seances/#{seance.id}", headers: setup_request(user_1))
+      expect(response.status).to eq(200)
+    end
+
+    it "works and return status 200" do
+      get("/api/seances/#{seance.id}", headers: setup_request(user_2))
+      expect(response.status).to eq(200)
+    end
+
+    it "works and return status 200" do
+      get("/api/seances/#{seance.id}")
       expect(response.status).to eq(200)
     end
   end

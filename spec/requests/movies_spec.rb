@@ -13,6 +13,16 @@ RSpec.describe "Movies requests" do
       get("/api/movies", headers: setup_request(user_1))
       expect(response.status).to eq(200)
     end
+
+    it "works and return status 200" do
+      get("/api/movies", headers: setup_request(user_2))
+      expect(response.status).to eq(200)
+    end
+
+    it "works and return status 200" do
+      get("/api/movies")
+      expect(response.status).to eq(200)
+    end
   end
 
   resource "Movies" do
@@ -20,7 +30,7 @@ RSpec.describe "Movies requests" do
       example "Gets list of movies" do
         do_request
         
-        expect(status).to eq(401)
+        expect(status).to eq(200)
       end
     end
   end
@@ -30,6 +40,16 @@ RSpec.describe "Movies requests" do
 
     it "works and return status 200" do
       get("/api/movies/#{movie.id}", headers: setup_request(user_1))
+      expect(response.status).to eq(200)
+    end
+
+    it "works and return status 200" do
+      get("/api/movies/#{movie.id}", headers: setup_request(user_2))
+      expect(response.status).to eq(200)
+    end
+
+    it "works and return status 200" do
+      get("/api/movies/#{movie.id}")
       expect(response.status).to eq(200)
     end
   end

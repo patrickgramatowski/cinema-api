@@ -21,7 +21,7 @@
 - [x] Application should have provided seeds and should be generally operational   
 - [x] At least 80% of tests coverage    
 - [ ] Application should have connected Sentry and CircleCI   
-- [ ] Application should be accessible publicly (for instance by Heroku)   
+- [x] Application should be accessible publicly (for instance by Heroku) [Heroku](https://cinema-api-ruby.herokuapp.com/api/movies)   
 - [x] Application should have configured rubocop and should fulfill all rubocop requirements. 
       
 ### Nice to have:   
