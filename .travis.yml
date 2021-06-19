@@ -11,5 +11,9 @@ services:
   - postgresql
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
-  - bin/rails db:migrate RAILS_ENV=test
   - cp config/database.yml.travis config/database.yml
+ jobs:
+  include:
+    - stage: "Testing time"
+      script:
+        - bundle exec rspec spec
