@@ -27,7 +27,7 @@ module Reservations
           seance_id: params[:seance_id],
           ticket_desk_id: params[:ticket_desk_id],
           status: "paid",
-          user_id: user # todo seed - abstarct user
+          user_id: 999 # add reservations created offline to an abstract user - id: 999
         }
       end
 
