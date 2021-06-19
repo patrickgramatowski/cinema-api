@@ -9,8 +9,3 @@ services:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
- jobs:
-  include:
-    - stage: "Testing time"
-      script:
-        - bundle exec rspec spec
