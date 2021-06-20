@@ -50,7 +50,7 @@ module Reservations
       end
 
       def archive(reservation:)
-        archive_date = reservation.seance.date
+        archive_date = reservation.seance.time
         ArchiveReservationWorker.perform_at(archive_date, reservation.id)
       end
     end
