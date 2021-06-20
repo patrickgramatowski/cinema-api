@@ -16,6 +16,7 @@ module Reservations
           repository.create!(reservation_params).tap do |reservation|
             Tickets::UseCases::Create.new(reservation: reservation, tickets: ticket_params(params[:tickets])).call
             cancel_expired(reservation: reservation)
+            archive(reservation: reservation)
           end
         end
       end
@@ -46,6 +47,11 @@ module Reservations
       def cancel_expired(reservation:)
         cancel_date = reservation.seance.time_before_seance
         CancelReservationWorker.perform_at(cancel_date, reservation.id)
+      end
+
+      def archive(reservation:)
+        archive_date = reservation.seance.date
+        ArchiveReservationWorker.perform_at(archive_date, reservation.id)
       end
     end
   end
