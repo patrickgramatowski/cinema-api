@@ -44,9 +44,3 @@ describe RegistrationsController, type: :request do
     end
   end
 end
-
-private
-
-def json
-  JSON.parse(response.body)
-end

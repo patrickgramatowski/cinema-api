@@ -44,14 +44,3 @@ describe SessionsController, type: :request do
     end
   end
 end
-
-private
-
-def login_with_api(user)
-  post '/api/login', params: {
-    user: {
-      email: user.email,
-      password: user.password
-    }
-  }
-end
