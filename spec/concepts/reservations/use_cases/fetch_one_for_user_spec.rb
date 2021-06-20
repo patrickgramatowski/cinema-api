@@ -9,9 +9,9 @@ RSpec.describe Reservations::UseCases::FetchOneForUser do
     let!(:reservation_2) { create(:reservation, user_id: user.id) }
     let!(:reservation_3) { create(:reservation, user_id: user_2.id) }
 
-    let(:instance) { described_class.new(user_id: user.id, reservation_id: reservation_1.id) }
-    let(:instance_2) { described_class.new(user_id: user_2.id, reservation_id: reservation_3.id) }
-    let(:instance_3) { described_class.new(user_id: user.id, reservation_id: reservation_3.id) }
+    let(:instance) { described_class.new(user: user, reservation_id: reservation_1.id) }
+    let(:instance_2) { described_class.new(user: user_2, reservation_id: reservation_3.id) }
+    let(:instance_3) { described_class.new(user: user, reservation_id: reservation_3.id) }
 
 
     it "shows the reservation" do

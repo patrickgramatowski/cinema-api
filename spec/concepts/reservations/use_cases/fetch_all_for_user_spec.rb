@@ -9,8 +9,8 @@ RSpec.describe Reservations::UseCases::FetchAllForUser do
     let!(:reservation_2) { create(:reservation, user_id: user.id) }
     let!(:reservation_3) { create(:reservation, user_id: user_2.id) }
 
-    let(:instance) { described_class.new(user_id: user.id) }
-    let(:instance_2) { described_class.new(user_id: user_2.id) }
+    let(:instance) { described_class.new(user: user) }
+    let(:instance_2) { described_class.new(user: user_2) }
 
     it "shows users reservations" do
       expect(instance.call.count).to eql(2)
