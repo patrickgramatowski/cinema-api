@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
       collection do
         get '/uindex', to: 'reservations#user_index'
-        get '/ushow', to: 'reservations#user_show'
+        get '/ushow/:id', to: 'reservations#user_show'
         post '/offline', to: 'reservations#create'
         post '/online', to: 'reservations#create_online'
       end

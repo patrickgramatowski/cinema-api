@@ -3,15 +3,15 @@
 module Reservations
   module UseCases
     class FetchAllForUser
-      attr_reader :repository, :user_id
+      attr_reader :repository, :user
 
-      def initialize(user_id:, repository: Reservations::Repository.new)
+      def initialize(user:, repository: Reservations::Repository.new)
         @repository = repository
-        @user_id = user_id
+        @user = user
       end
 
       def call
-        repository.adapter.where(user_id: user_id).all
+        User.find(user.id).reservations
       end
     end
   end

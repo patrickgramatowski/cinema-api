@@ -3,16 +3,16 @@
 module Reservations
   module UseCases
     class FetchOneForUser
-      attr_reader :repository, :user_id, :reservation_id
+      attr_reader :repository, :reservation_id, :user
 
-      def initialize(user_id:, reservation_id:, repository: Reservations::Repository.new)
+      def initialize(user:, reservation_id:, repository: Reservations::Repository.new)
         @repository = repository
-        @user_id = user_id
         @reservation_id = reservation_id
+        @user = user
       end
 
       def call
-        repository.adapter.where("user_id = :user_id and id = :id", { user_id: user_id, id: reservation_id })
+        User.find(user.id).reservations.where(id: reservation_id)
       end
     end
   end

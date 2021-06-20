@@ -13,4 +13,8 @@ class Reservation < ApplicationRecord
   def expired?
     status == "pending" && seance.after_confirmation_time?
   end
+
+  def to_archive?
+    seance.seance_has_finished? && status != "cancelled"
+  end
 end

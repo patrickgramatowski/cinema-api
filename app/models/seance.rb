@@ -14,6 +14,10 @@ class Seance < ApplicationRecord
     date - 30.minutes
   end
 
+  def seance_has_finished?
+    Time.current.after?(date)
+  end
+
   def after_confirmation_time?
     Time.current.after?(time_before_seance)
   end

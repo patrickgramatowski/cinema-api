@@ -11,11 +11,16 @@ module Api
     end
 
     def user_index
-      render jsonapi: Reservations::UseCases::FetchAllForUser.new(user_id: current_user.id).call
+      render jsonapi: Reservations::UseCases::FetchAllForUser.new(user: current_user).call
     end
 
     def user_show
-      render jsonapi: Reservations::UseCases::FetchOneForUser.new(user_id: current_user.id, reservation_id: params[:id]).call
+      reservation = Reservations::UseCases::FetchOneForUser.new(user: current_user, reservation_id: params[:id]).call
+      if reservation.empty?
+        redirect_back fallback_location: api_movies_path
+      else
+        render jsonapi: reservation
+      end
     end
 
     # HTTP GET reservation by id
