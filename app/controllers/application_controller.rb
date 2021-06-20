@@ -10,7 +10,11 @@ class ApplicationController < ActionController::API
   end
 
   def check_permission
-    redirect_back fallback_location: api_movies_path unless correct_user
+    if user_signed_in?
+      redirect_back fallback_location: api_movies_path unless correct_user
+    else
+      redirect_back fallback_location: api_movies_path
+    end
   end
 
   # Devise-jwt
