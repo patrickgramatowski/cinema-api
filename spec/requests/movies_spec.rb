@@ -8,19 +8,23 @@ RSpec.describe "Movies requests", type: :request do
   describe "GET /api/movies" do
     let!(:movie) { build(:movie) }
 
-    it "works and return status 200" do
-      get("/api/movies", headers: setup_request(user_1))
-      expect(response.status).to eq(200)
+    context "when user is logged in" do
+      it "works and return status 200" do
+        get("/api/movies", headers: setup_request(user_1))
+        expect(response.status).to eq(200)
+      end
+
+      it "works and return status 200" do
+        get("/api/movies", headers: setup_request(user_2))
+        expect(response.status).to eq(200)
+      end
     end
 
-    it "works and return status 200" do
-      get("/api/movies", headers: setup_request(user_2))
-      expect(response.status).to eq(200)
-    end
-
-    it "works and return status 200" do
-      get("/api/movies")
-      expect(response.status).to eq(200)
+    context "when user is not logged in" do
+      it "works and return status 200" do
+        get("/api/movies")
+        expect(response.status).to eq(200)
+      end
     end
   end
 
@@ -37,31 +41,44 @@ RSpec.describe "Movies requests", type: :request do
   describe "GET /api/movies/:id" do
     let!(:movie) { build(:movie) }
 
-    it "works and return status 200" do
-      get("/api/movies/#{movie.id}", headers: setup_request(user_1))
-      expect(response.status).to eq(200)
+    context "when user is logged in" do
+      it "works and return status 200" do
+        get("/api/movies/#{movie.id}", headers: setup_request(user_1))
+        expect(response.status).to eq(200)
+      end
+
+      it "works and return status 200" do
+        get("/api/movies/#{movie.id}", headers: setup_request(user_2))
+        expect(response.status).to eq(200)
+      end
     end
 
-    it "works and return status 200" do
-      get("/api/movies/#{movie.id}", headers: setup_request(user_2))
-      expect(response.status).to eq(200)
-    end
-
-    it "works and return status 200" do
-      get("/api/movies/#{movie.id}")
-      expect(response.status).to eq(200)
+    context "when user is not logged in" do
+      it "works and return status 200" do
+        get("/api/movies/#{movie.id}")
+        expect(response.status).to eq(200)
+      end
     end
   end
 
   describe "POST /api/movies" do
-    it "works and return status 201" do
-      post("/api/movies", headers: setup_request(user_2), params: { movie: {  title: "Movie_9", genre: "Comedy", length: 110 } }.to_json )
-      expect(response.status).to eq(201)
+    context "when user is logged in" do
+      it "works if user is employee" do
+        post("/api/movies", headers: setup_request(user_2), params: { movie: {  title: "Movie_9", genre: "Comedy", length: 110 } }.to_json )
+        expect(response.status).to eq(201)
+      end
+
+      it "redirects if user is not employee" do
+        post("/api/movies", headers: setup_request(user_1), params: { movie: {  title: "Movie_9", genre: "Comedy", length: 110 } }.to_json )
+        expect(response.status).to eq(302)
+      end
     end
 
-    it "redirects and return status 302" do
-      post("/api/movies", headers: setup_request(user_1), params: { movie: {  title: "Movie_9", genre: "Comedy", length: 110 } }.to_json )
-      expect(response.status).to eq(302)
+    context "when user is not logged in" do
+      it "redirects" do
+        post("/api/movies", params: { movie: {  title: "Movie_9", genre: "Comedy", length: 110 } }.to_json )
+        expect(response.status).to eq(302)
+      end
     end
   end
 
@@ -75,28 +92,46 @@ RSpec.describe "Movies requests", type: :request do
   describe 'PUT /api/movies/:id' do
     let!(:movie) { create(:movie) }
 
-    it 'works and returns status 200' do
-      put("/api/movies/#{movie.id}", headers: setup_request(user_2), params: { movie: { id: movie.id, title: "Movie_updated" } }.to_json)
-      expect(response.status).to eq(200)
+    context "when user is logged in" do
+      it 'works if user is employee' do
+        put("/api/movies/#{movie.id}", headers: setup_request(user_2), params: { movie: { id: movie.id, title: "Movie_updated" } }.to_json)
+        expect(response.status).to eq(200)
+      end
+
+      it "redirects if user is not employee" do
+        put("/api/movies/#{movie.id}", headers: setup_request(user_1), params: { movie: { id: movie.id, title: "Movie_updated" } }.to_json)
+        expect(response.status).to eq(302)
+      end
     end
 
-    it "redirects and return status 302" do
-      put("/api/movies/#{movie.id}", headers: setup_request(user_1), params: { movie: { id: movie.id, title: "Movie_updated" } }.to_json)
-      expect(response.status).to eq(302)
+    context "when user is not logged in" do
+      it "redirects" do
+        put("/api/movies/#{movie.id}", params: { movie: { id: movie.id, title: "Movie_updated" } }.to_json)
+        expect(response.status).to eq(302)
+      end
     end
   end
 
   describe 'DELETE /api/movies/:id' do
     let!(:movie) { create(:movie) }
 
-    it 'works and return status 204' do
-      delete("/api/movies/#{movie.id}", headers: setup_request(user_2))
-      expect(response.status).to eq(204)
+    context "when user is logged in" do
+      it 'works if user is employee' do
+        delete("/api/movies/#{movie.id}", headers: setup_request(user_2))
+        expect(response.status).to eq(204)
+      end
+
+      it "redirects if user is not employee" do
+        delete("/api/movies/#{movie.id}", headers: setup_request(user_1))
+        expect(response.status).to eq(302)
+      end
     end
 
-    it "redirects and return status 302" do
-      delete("/api/movies/#{movie.id}", headers: setup_request(user_1))
-      expect(response.status).to eq(302)
-    end    
+    context "when user is not logged in" do
+      it "redirects" do
+        delete("/api/movies/#{movie.id}")
+        expect(response.status).to eq(302)
+      end
+    end
   end
 end
