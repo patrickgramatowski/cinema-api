@@ -44,8 +44,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem "devise"
 gem "devise-jwt"
 
-gem "sidekiq", "~> 6.2"
 gem 'rspec-sidekiq', '~> 3.1'
+gem "sidekiq", "~> 6.2"
 
-gem "sentry-ruby"
 gem "sentry-rails"
+gem "sentry-ruby"
