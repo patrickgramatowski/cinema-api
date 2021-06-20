@@ -15,7 +15,6 @@ module Reservations
         ActiveRecord::Base.transaction do
           repository.create!(reservation_params).tap do |reservation|
             Tickets::UseCases::Create.new(reservation: reservation, tickets: params[:tickets]).call
-            cancel_expired(reservation: reservation)
           end
         end
       end
@@ -29,11 +28,6 @@ module Reservations
           status: "paid",
           user_id: 999 # add reservations created offline to an abstract user - id: 999
         }
-      end
-
-      def cancel_expired(reservation:)
-        cancel_date = reservation.seance.time_before_seance
-        CancelReservationWorker.perform_at(cancel_date, reservation.id)
       end
     end
   end
