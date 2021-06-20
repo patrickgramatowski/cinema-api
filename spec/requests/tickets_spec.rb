@@ -13,28 +13,46 @@ RSpec.describe "Tickets requests", type: :request do
   describe "GET /api/reservations/:id/tickets" do
     let!(:ticket) { build(:ticket) }
 
-    it "works and return status 200" do
-      get("/api/reservations/#{reservation}/tickets", headers: setup_request(user_2))
-      expect(response.status).to eq(200)
+    context "when user logged in" do
+      it "works and return status 200" do
+        get("/api/reservations/#{reservation}/tickets", headers: setup_request(user_2))
+        expect(response.status).to eq(200)
+      end
+
+      it "redirects and returns 302" do
+        get("/api/reservations/#{reservation}/tickets", headers: setup_request(user_1))
+        expect(response.status).to eq(302)
+      end
     end
 
-    it "redirects and returns 302" do
-      get("/api/reservations/#{reservation}/tickets", headers: setup_request(user_1))
-      expect(response.status).to eq(302)
+    context "when user not logged in" do
+      it "redirects and returns 302" do
+        get("/api/reservations/#{reservation}/tickets")
+        expect(response.status).to eq(302)
+      end
     end
   end
 
   describe "GET /api/reservations/:id/tickets/:id" do
     let!(:ticket) { build(:ticket) }
 
-    it "works and return status 200" do
-      get("/api/reservations/#{reservation}/tickets/#{ticket.id}", headers: setup_request(user_2))
-      expect(response.status).to eq(200)
+    context "when user logged in" do
+      it "works and return status 200" do
+        get("/api/reservations/#{reservation}/tickets/#{ticket.id}", headers: setup_request(user_2))
+        expect(response.status).to eq(200)
+      end
+
+      it "redirects returns 302" do
+        get("/api/reservations/#{reservation}/tickets/#{ticket.id}", headers: setup_request(user_1))
+        expect(response.status).to eq(302)
+      end
     end
 
-    it "redirects returns 302" do
-      get("/api/reservations/#{reservation}/tickets/#{ticket.id}", headers: setup_request(user_1))
-      expect(response.status).to eq(302)
+    context "when user not logged in" do
+      it "redirects returns 302" do
+        get("/api/reservations/#{reservation}/tickets/#{ticket.id}")
+        expect(response.status).to eq(302)
+      end
     end
   end
 end

@@ -109,7 +109,7 @@ RSpec.describe "Reservations requests", type: :request do
     let!(:ticket_desk) { create(:ticket_desk, id: 101, online: true) }
 
     context "when user is logged in" do
-      it "works if user is not meployee" do
+      it "works if user is not employee" do
           post("/api/reservations/online", headers: setup_request(user_1), params: { seance_id: seance.id, status: "paid" , tickets: [{ seat: '8A', ticket_type: "normal", price: 22 }] }.to_json)
           expect(response.status).to eq(201)
       end
