@@ -1,8 +1,7 @@
 require "rails_helper"
 require "rspec_api_documentation/dsl"
-require "devise/jwt/test_helpers"
 
-RSpec.describe "Seances requests" do
+RSpec.describe "Seances requests", type: :request do
   let(:user_1) { create(:user, employee: false) }
   let(:user_2) { create(:user, employee: true) }
 
@@ -93,11 +92,4 @@ RSpec.describe "Seances requests" do
       expect(response.status).to eq(302)
     end
   end
-end
-
-private
-
-def setup_request(user)
-  headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-  auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
 end

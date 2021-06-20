@@ -1,10 +1,10 @@
 require "rails_helper"
 require "rspec_api_documentation/dsl"
-require "devise/jwt/test_helpers"
 
-RSpec.describe "Reservations requests" do
+RSpec.describe "Reservations requests", type: :request do
   let(:user_1) { create(:user, id: 1, email: "testtest@wp.pl", password: "testtest", employee: false )}
   let(:user_2) { create(:user, id: 2, email: "testtest2@wp.pl", password: "testtest", employee: true )}
+  let!(:user_3) { create(:user, id: 999, email: "testtest3@wp.pl", password: "testtest", employee: false )}
 
   describe "GET /api/reservations" do
     let!(:reservation) { build(:reservation) }
@@ -106,11 +106,4 @@ RSpec.describe "Reservations requests" do
       expect(response.status).to eq(204)
     end
   end
-end
-
-private
-
-def setup_request(user)
-  headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
-  auth_headers = Devise::JWT::TestHelpers.auth_headers(headers, user)
 end
